@@ -1,30 +1,36 @@
 # Flowboard
 
-An accessible Kanban board built with React, TypeScript and TanStack Query.
-The point of this project is depth, not novelty: keyboard drag and drop, optimistic
-updates that roll back correctly when the server fails, and a typed, tested data layer.
+An accessible Kanban board built with React, TypeScript and TanStack Query, backed by a real
+Node, Express and MongoDB API. The point of this project is depth, not novelty: keyboard drag
+and drop, optimistic updates that roll back correctly when the server fails, and a typed,
+tested data layer.
 
 > **Status:** work in progress
 
-## Important: the API is mocked
+## Two repositories
 
-All data comes from a **mocked REST API (MSW) running in the browser**, with data persisted
-in `localStorage`. There is no real backend. This is intentional so failures (500, 409,
-offline) can be injected and tested. See `docs/decisions/001-vite-spa-with-msw.md`.
+| Repository                                                        | What it is                               |
+| ----------------------------------------------------------------- | ---------------------------------------- |
+| **flowboard** (this repo)                                         | React + Vite + TypeScript SPA, Storybook |
+| [flowboard-api](https://github.com/rajakuma6an2022/flowboard-api) | Express 5 + MongoDB REST API             |
+
+The two sides agree on data shapes through a Zod contract file owned by the API. See
+[ADR-003](docs/decisions/003-separate-web-and-api-repositories.md).
+
+.
 
 ## Scripts
 
 | Command                   | What it does                        |
 | ------------------------- | ----------------------------------- |
 | `npm run dev`             | Start the dev server                |
-| `npm test`                | Run unit and component tests        |
 | `npm run lint`            | Lint with oxlint                    |
 | `npm run typecheck`       | Type-check with `tsc -b`            |
 | `npm run build`           | Type-check and build for production |
 | `npm run storybook`       | Start Storybook on port 6006        |
 | `npm run build-storybook` | Build static Storybook              |
 
-Requires Node 22 or newer.
+Requires Node 22.12 or newer.
 
 ## Design tokens (Figma variable to code)
 
