@@ -1,32 +1,41 @@
-# React + TypeScript + Vite
+# Flowboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+An accessible Kanban board built with React, TypeScript and TanStack Query.
+The point of this project is depth, not novelty: keyboard drag and drop, optimistic
+updates that roll back correctly when the server fails, and a typed, tested data layer.
 
-Currently, two official plugins are available:
+> **Status:** work in progress
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Important: the API is mocked
 
-## React Compiler
+All data comes from a **mocked REST API (MSW) running in the browser**, with data persisted
+in `localStorage`. There is no real backend. This is intentional so failures (500, 409,
+offline) can be injected and tested. See `docs/decisions/001-vite-spa-with-msw.md`.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Scripts
 
-## Expanding the Oxlint configuration
+| Command                   | What it does                        |
+| ------------------------- | ----------------------------------- |
+| `npm run dev`             | Start the dev server                |
+| `npm test`                | Run unit and component tests        |
+| `npm run lint`            | Lint with oxlint                    |
+| `npm run typecheck`       | Type-check with `tsc -b`            |
+| `npm run build`           | Type-check and build for production |
+| `npm run storybook`       | Start Storybook on port 6006        |
+| `npm run build-storybook` | Build static Storybook              |
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+Requires Node 22 or newer.
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
+## Design tokens (Figma variable to code)
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+| Figma variable       | CSS variable (`src/index.css`) | Tailwind utility      |
+| -------------------- | ------------------------------ | --------------------- |
+| color/primary        | `--color-primary`              | `bg-primary`          |
+| color/text-secondary | `--color-text-secondary`       | `text-text-secondary` |
+| color/danger-text    | `--color-danger-text`          | `text-danger-text`    |
+| radius/card (12px)   | `--radius-card`                | `rounded-card`        |
+| type/h1 (24px)       | `--text-h1`                    | `text-h1`             |
+
+## Architecture decisions
+
+Decision records live in [`docs/decisions`](docs/decisions).
